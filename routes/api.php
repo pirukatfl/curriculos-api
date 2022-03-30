@@ -14,7 +14,7 @@ use App\Http\Controllers\ImagesController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Auth\RgisterController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,8 +40,8 @@ Route::resource('images', ImagesController::class);
 
 Route::prefix('auth')->group(function() {
     Route::post('login', [LoginController::class, 'login']);
-    Route::post('logout', ['LogoutController', 'logout']);
-    Route::post('register', ['RegisterController', 'register']);
+    Route::post('logout', [LogoutController::class, 'logout']);
+    Route::post('register', [RegisterController::class, 'register']);
 });
 
 

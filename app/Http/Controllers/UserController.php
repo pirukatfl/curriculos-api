@@ -21,7 +21,6 @@ class UserController extends Controller
                 'data'=> $data
             ], 200);
         } catch (\Throwable $th) {
-            return $th;
             return response()->json([
                 'msg'=> $th
             ], 500);
@@ -46,19 +45,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $user = $request->all();
-            $user['password'] = Hash::make($user['password']);
-
-            $data = User::updateOrCreate($user);
-            return response()->json([
-                'data'=> $data
-            ], 200);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'msg'=> $th
-            ], 500);
-        }
+        //
     }
 
     /**

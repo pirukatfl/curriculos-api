@@ -17,6 +17,10 @@ class CreateProfilesTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('biography');
+            $table->string('gender');
+            $table->string('year');
+            $table->date('birth_date');
+            $table->string('cpf_cnpj');
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
