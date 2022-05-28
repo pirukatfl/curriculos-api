@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Adresses;
+use App\Models\User_has_permission;
 use Illuminate\Http\Request;
 
-class AdressesController extends Controller
+class UserHasPermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,17 +14,7 @@ class AdressesController extends Controller
      */
     public function index()
     {
-        try {
-            $data = Adresses::paginate(10);
-            return response()->json([
-                'data'=> $data
-            ], 200);
-        } catch (\Throwable $th) {
-            return $th;
-            return response()->json([
-                'msg'=> $th
-            ], 500);
-        }
+        //
     }
 
     /**
@@ -45,25 +35,16 @@ class AdressesController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $data = Adresses::updateOrCreate($request->all());
-            return response()->json([
-                'data'=> $data
-            ], 200);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'msg'=> $th
-            ], 500);
-        }
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Adresses  $adresses
+     * @param  \App\Models\User_has_permission  $user_has_permission
      * @return \Illuminate\Http\Response
      */
-    public function show(Adresses $adresses)
+    public function show(User_has_permission $user_has_permission)
     {
         //
     }
@@ -71,10 +52,10 @@ class AdressesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Adresses  $adresses
+     * @param  \App\Models\User_has_permission  $user_has_permission
      * @return \Illuminate\Http\Response
      */
-    public function edit(Adresses $adresses)
+    public function edit(User_has_permission $user_has_permission)
     {
         //
     }
@@ -83,10 +64,10 @@ class AdressesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Adresses  $adresses
+     * @param  \App\Models\User_has_permission  $user_has_permission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Adresses $adresses)
+    public function update(Request $request, User_has_permission $user_has_permission)
     {
         //
     }
@@ -94,10 +75,10 @@ class AdressesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Adresses  $adresses
+     * @param  \App\Models\User_has_permission  $user_has_permission
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Adresses $adresses)
+    public function destroy(User_has_permission $user_has_permission)
     {
         //
     }

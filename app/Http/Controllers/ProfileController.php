@@ -46,10 +46,12 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         try {
-            $data = Profile::updateOrCreate($request->all());
+            // dd($request->all());
+            $data = Profile::updateOrCreate(['user_id'=> $request->all()['user_id']],$request->all());
             return response()->json([
                 'data'=> $data
             ], 200);
+            
         } catch (\Throwable $th) {
             return response()->json([
                 'msg'=> $th
@@ -63,9 +65,18 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function show(Profile $profile)
+    public function show($id)
     {
-        //
+        try {
+            $data = Profile::where('user_id',$id)->first();
+            return response()->json([
+                'data'=> $data
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'msg'=> $th
+            ], 500);
+        }
     }
 
     /**

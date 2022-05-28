@@ -46,11 +46,24 @@ class SchoolingController extends Controller
     public function store(Request $request)
     {
         try {
-            $data = Schooling::updateOrCreate($request->all());
+            foreach($request->all()['schoolings'] as $item){
+                Schooling::updateOrCreate(
+                    [
+                        'id'=> $item['id'],
+                        'user_id'=> $item['user_id'],
+                        'institution_name'=> $item['institution_name'],
+                        'course_name'=> $item['course_name'],
+                        'date_in'=> $item['date_in'],
+                        'date_out'=> $item['date_out'],
+                    ],$item
+                );
+            }
             return response()->json([
-                'data'=> $data
+                'msg'=> 'salvos com sucesso!'
             ], 200);
-        } catch (\Throwable $th) {
+
+        } catch (\Error $th) {
+            return $th;
             return response()->json([
                 'msg'=> $th
             ], 500);
@@ -63,9 +76,18 @@ class SchoolingController extends Controller
      * @param  \App\Models\Schooling  $schooling
      * @return \Illuminate\Http\Response
      */
-    public function show(Schooling $schooling)
+    public function show($id)
     {
-        //
+        try {
+            $data = Schooling::where('user_id',$id)->get();
+            return response()->json([
+                'data'=> $data
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'msg'=> $th
+            ], 500);
+        }
     }
 
     /**
@@ -97,8 +119,18 @@ class SchoolingController extends Controller
      * @param  \App\Models\Schooling  $schooling
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Schooling $schooling)
+    public function delete(Request $request)
     {
-        //
+        try {
+            $data = Schooling::find($request->all()['schoolings']['id']);
+            $data->delete();
+            return response()->json([
+                'data'=> $data
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'msg'=> $th
+            ], 500);
+        }
     }
 }

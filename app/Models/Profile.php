@@ -12,6 +12,10 @@ class Profile extends Model
     protected $fillable = [
         'user_id',
         'name',
-        'biography'
+        'biography',
+        'year',
+        'gender',
+        'birth_date',
+        'cpf_cnpj',
     ];
 }

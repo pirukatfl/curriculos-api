@@ -15,7 +15,7 @@ class ExperiencesController extends Controller
     public function index()
     {
         try {
-            $data = Experiences::paginate(10);
+            $data = Experiences::all();
             return response()->json([
                 'data'=> $data
             ], 200);
@@ -46,11 +46,21 @@ class ExperiencesController extends Controller
     public function store(Request $request)
     {
         try {
-            $data = Experiences::updateOrCreate($request->all());
+            foreach($request->all()['experiences'] as $item){
+                Experiences::updateOrCreate(
+                    [
+                        'id'=> $item['id'],
+                        'user_id'=> $item['user_id'],
+                        'company_name'=> $item['company_name'],
+                    ],$item
+                );
+            }
             return response()->json([
-                'data'=> $data
+                'msg'=> 'salvos com sucesso!'
             ], 200);
-        } catch (\Throwable $th) {
+
+        } catch (\Error $th) {
+            return $th;
             return response()->json([
                 'msg'=> $th
             ], 500);
@@ -63,9 +73,18 @@ class ExperiencesController extends Controller
      * @param  \App\Models\Experiences  $experiences
      * @return \Illuminate\Http\Response
      */
-    public function show(Experiences $experiences)
+    public function show($id)
     {
-        //
+        try {
+            $data = Experiences::where('user_id',$id)->get();
+            return response()->json([
+                'data'=> $data
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'msg'=> $th
+            ], 500);
+        }
     }
 
     /**
@@ -97,8 +116,18 @@ class ExperiencesController extends Controller
      * @param  \App\Models\Experiences  $experiences
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Experiences $experiences)
+    public function delete(Request $request)
     {
-        //
+        try {
+            $data = Experiences::find($request->all()['experiences']['id']);
+            $data->delete();
+            return response()->json([
+                'data'=> $data
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'msg'=> $th
+            ], 500);
+        }
     }
 }

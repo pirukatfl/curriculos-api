@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\SchoolingController;
 use App\Http\Controllers\ImagesController;
+use App\Http\Controllers\ResumesController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -30,12 +31,22 @@ use App\Http\Controllers\Auth\RegisterController;
 Route::resource('permissions', PermissionsController::class);
 Route::resource('users', UserController::class);
 Route::resource('adresses', AdressesController::class);
-Route::resource('contacts', ContactsController::class);
-Route::resource('experiences', ExperiencesController::class);
 Route::resource('profiles', ProfileController::class);
 Route::resource('courses', CoursesController::class);
+
+Route::resource('contacts', ContactsController::class);
+Route::post('contacts/delete', [ContactsController::class, 'delete']);
+
+Route::resource('experiences', ExperiencesController::class);
+Route::post('experiences/delete', [ExperiencesController::class, 'delete']);
+
+Route::post('courses/delete', [CoursesController::class, 'delete']);
 Route::resource('schoolings', SchoolingController::class);
+
+Route::post('schoolings/delete', [SchoolingController::class, 'delete']);
 Route::resource('images', ImagesController::class);
+
+Route::resource('resumes', ResumesController::class);
 
 
 Route::prefix('auth')->group(function() {

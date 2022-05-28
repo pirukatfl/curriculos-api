@@ -23,13 +23,13 @@ class LoginController extends Controller {
 
             $token = auth()->attempt($credentials);
             if (!$token) {
-                return response()->json(['error' => 'Unauthorized'], 401);
+                return response()->json(['error' => 'Unauthorized'], 402);
             }
 
             return $this->respondWithToken($token);
         } catch (\Throwable $th) {
             return response()->json([
-                'msg'=> $th
+                'error'=> $th
             ], 500);
         }
     }
@@ -40,7 +40,7 @@ class LoginController extends Controller {
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'user'=> auth()->user()
+            // 'user'=> auth()->user()
         ]);
     }
 }

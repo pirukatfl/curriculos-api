@@ -15,7 +15,7 @@ class CoursesController extends Controller
     public function index()
     {
         try {
-            $data = Courses::paginate(10);
+            $data = Courses::all();
             return response()->json([
                 'data'=> $data
             ], 200);
@@ -46,11 +46,24 @@ class CoursesController extends Controller
     public function store(Request $request)
     {
         try {
-            $data = Courses::updateOrCreate($request->all());
+            foreach($request->all()['courses'] as $item){
+                // return $request->all();
+                Courses::updateOrCreate(
+                    [
+                        'id'=> $item['id'],
+                        'user_id'=> $item['user_id'],
+                        'institution_name'=> $item['institution_name'],
+                        'course_name'=> $item['course_name'],
+                    ],$item
+                );
+            }
+
             return response()->json([
-                'data'=> $data
+                'msg'=> 'salvos com sucesso!'
             ], 200);
+
         } catch (\Throwable $th) {
+            return $th;
             return response()->json([
                 'msg'=> $th
             ], 500);
@@ -63,9 +76,18 @@ class CoursesController extends Controller
      * @param  \App\Models\Courses  $courses
      * @return \Illuminate\Http\Response
      */
-    public function show(Courses $courses)
+    public function show($id)
     {
-        //
+        try {
+            $data = Courses::where('user_id',$id)->get();
+            return response()->json([
+                'data'=> $data
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'msg'=> $th
+            ], 500);
+        }
     }
 
     /**
@@ -97,8 +119,18 @@ class CoursesController extends Controller
      * @param  \App\Models\Courses  $courses
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Courses $courses)
+    public function delete(Request $request)
     {
-        //
+        try {
+            $data = Courses::find($request->all()['courses']['id']);
+            $data->delete();
+            return response()->json([
+                'data'=> $data
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'msg'=> $th
+            ], 500);
+        }
     }
 }

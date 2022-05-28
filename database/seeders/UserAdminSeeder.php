@@ -16,7 +16,6 @@ class UserAdminSeeder extends Seeder
     public function run()
     {
         User::updateOrCreate([
-            'name'=> 'Administrador',
             'email'=> 'administracao.curriculos@gmail.com',
             'password' => Hash::make('curriculos@2022'),
             'permission_id'=> 1

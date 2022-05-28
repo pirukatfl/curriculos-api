@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contacts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ContactsController extends Controller
 {
@@ -46,10 +47,19 @@ class ContactsController extends Controller
     public function store(Request $request)
     {
         try {
-            $data = Contacts::updateOrCreate($request->all());
+            foreach($request->all()['contacts'] as $item){
+                Contacts::updateOrCreate(
+                    [
+                        'user_id'=> $item['user_id'],
+                        'type'=> $item['type'],
+                        'value'=> $item['value'],
+                    ],$item
+                );
+            }
             return response()->json([
-                'data'=> $data
+                'msg'=> 'salvos com sucesso!'
             ], 200);
+
         } catch (\Throwable $th) {
             return response()->json([
                 'msg'=> $th
@@ -63,9 +73,18 @@ class ContactsController extends Controller
      * @param  \App\Models\Contacts  $contacts
      * @return \Illuminate\Http\Response
      */
-    public function show(Contacts $contacts)
+    public function show($id)
     {
-        //
+        try {
+            $data = Contacts::where('user_id',$id)->get();
+            return response()->json([
+                'data'=> $data
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'msg'=> $th
+            ], 500);
+        }
     }
 
     /**
@@ -97,8 +116,18 @@ class ContactsController extends Controller
      * @param  \App\Models\Contacts  $contacts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contacts $contacts)
+    public function delete(Request $request)
     {
-        //
+        try {
+            $data = Contacts::find($request->all()['contacts']['id']);
+            $data->delete();
+            return response()->json([
+                'data'=> $data
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'msg'=> $th
+            ], 500);
+        }
     }
 }

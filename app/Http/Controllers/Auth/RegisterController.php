@@ -20,7 +20,7 @@ class RegisterController extends Controller {
         try {
             $user = $request->all();
             $user['password'] = Hash::make($user['password']);
-
+            // return $user;
             $data = User::updateOrCreate($user);
             return response()->json([
                 'data'=> $data

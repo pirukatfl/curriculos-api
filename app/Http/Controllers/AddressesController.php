@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Addresses;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class AddressesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +15,12 @@ class UserController extends Controller
     public function index()
     {
         try {
-            $data = User::paginate(10);
+            $data = Addresses::paginate(10);
             return response()->json([
                 'data'=> $data
             ], 200);
         } catch (\Throwable $th) {
+            return $th;
             return response()->json([
                 'msg'=> $th
             ], 500);
@@ -45,19 +45,29 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $data = Addresses::updateOrCreate(['user_id'=> $request->all()['user_id']],$request->all());
+            return response()->json([
+                'data'=> $data
+            ], 200);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'msg'=> $th
+            ], 500);
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Permissions  $permissions
+     * @param  \App\Models\Addresses  $addresses
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         try {
-            $data = User::where('user_id',$id)->first();
+            $data = Addresses::where('user_id',$id)->firstOrFail();
             return response()->json([
                 'data'=> $data
             ], 200);
@@ -71,10 +81,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Permissions  $permissions
+     * @param  \App\Models\Addresses  $addresses
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Addresses $addresses)
     {
         //
     }
@@ -83,10 +93,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Permissions  $permissions
+     * @param  \App\Models\Addresses  $addresses
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Addresses $addresses)
     {
         //
     }
@@ -94,10 +104,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Permissions  $permissions
+     * @param  \App\Models\Addresses  $addresses
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Addresses $addresses)
     {
         //
     }

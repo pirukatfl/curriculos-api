@@ -15,11 +15,12 @@ class CreateSchoolingsTable extends Migration
     {
         Schema::create('schoolings', function (Blueprint $table) {
             $table->id();
-            $table->string('institution_name');
-            $table->date('date_in');
-            $table->date('date_out');
-            $table->string('level_education');
-            $table->boolean('finished');
+            $table->string('institution_name')->nullable();
+            $table->string('course_name')->nullable();
+            $table->date('date_in')->nullable();
+            $table->date('date_out')->nullable();
+            $table->string('level_education')->nullable();
+            $table->boolean('finished')->nullable();
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
