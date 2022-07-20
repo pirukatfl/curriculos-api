@@ -15,7 +15,8 @@ class ResumesController extends Controller
                 'address',
                 'courses',
                 'experiences',
-                'schoolings'
+                'schoolings',
+                'image',
             ])
             ->select(['id', 'email'])
             ->get();

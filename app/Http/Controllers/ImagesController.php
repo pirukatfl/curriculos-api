@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Images;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 class ImagesController extends Controller
 {
@@ -14,7 +16,16 @@ class ImagesController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $data = Images::paginate(10);
+            return response()->json([
+                'data'=> $data
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'msg'=> $th
+            ], 500);
+        }
     }
 
     /**
@@ -35,7 +46,30 @@ class ImagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $user_id = $request->get('user_id');
+            $user_email = $request->get('user_email');
+            $image = $request->file('image');
+            $ext = $request->file('image')->guessExtension();
+            if ($image) {
+                Storage::delete([$user_email.'.png', $user_email.'.JPEG', $user_email.'.jpeg', $user_email.'.jpg']);
+                $path = Storage::putFileAs('/', $image, $user_email.'.'.$ext);
+
+            }
+            $data = Images::updateOrCreate(['user_id'=> $user_id], [
+                'user_id' => $user_id,
+                'image_url' => env('APP_URL').'/storage'.'/'.$user_email.'.'.$ext,
+            ]
+            );
+            return response()->json([
+                'data'=> $data
+            ], 200);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'msg'=> $th
+            ], 500);
+        }
     }
 
     /**
@@ -44,9 +78,18 @@ class ImagesController extends Controller
      * @param  \App\Models\Images  $images
      * @return \Illuminate\Http\Response
      */
-    public function show(Images $images)
+    public function show($id)
     {
-        //
+        try {
+            $data = Images::where('user_id',$id)->first();
+            return response()->json([
+                'data'=> $data
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'msg'=> $th
+            ], 500);
+        }
     }
 
     /**

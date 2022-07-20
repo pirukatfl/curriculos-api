@@ -44,7 +44,7 @@ Route::post('courses/delete', [CoursesController::class, 'delete']);
 Route::resource('schoolings', SchoolingController::class);
 
 Route::post('schoolings/delete', [SchoolingController::class, 'delete']);
-Route::resource('images', ImagesController::class);
+Route::resource('image', ImagesController::class);
 
 Route::resource('resumes', ResumesController::class);
 

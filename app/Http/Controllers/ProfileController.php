@@ -46,12 +46,11 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         try {
-            // dd($request->all());
             $data = Profile::updateOrCreate(['user_id'=> $request->all()['user_id']],$request->all());
             return response()->json([
                 'data'=> $data
             ], 200);
-            
+
         } catch (\Throwable $th) {
             return response()->json([
                 'msg'=> $th

@@ -18,4 +18,8 @@ class Profile extends Model
         'birth_date',
         'cpf_cnpj',
     ];
+
+    public function image() {
+        return $this->hasOne(Images::class);
+    }
 }
