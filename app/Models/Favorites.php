@@ -5,16 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Courses extends Model
+class Favorites extends Model
 {
     use HasFactory;
-    protected $table = 'courses';
+
     protected $fillable = [
         'user_id',
-        'institution_name',
-        'date_in',
-        'date_out',
-        'course_name',
-        'finished'
+        'user_in_list_id',
     ];
 }

@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdressesController;
+use App\Http\Controllers\AddressesController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\ExperiencesController;
 use App\Http\Controllers\ProfileController;
@@ -12,6 +12,8 @@ use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\SchoolingController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\ResumesController;
+use App\Http\Controllers\FavoritesController;
+use App\Http\Controllers\LogsController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -30,9 +32,12 @@ use App\Http\Controllers\Auth\RegisterController;
 
 Route::resource('permissions', PermissionsController::class);
 Route::resource('users', UserController::class);
-Route::resource('adresses', AdressesController::class);
+Route::resource('adresses', AddressesController::class);
 Route::resource('profiles', ProfileController::class);
 Route::resource('courses', CoursesController::class);
+Route::resource('logs', LogsController::class);
+
+Route::get('all-courses', [CoursesController::class, 'allCourses']);
 
 Route::resource('contacts', ContactsController::class);
 Route::post('contacts/delete', [ContactsController::class, 'delete']);
@@ -46,7 +51,12 @@ Route::resource('schoolings', SchoolingController::class);
 Route::post('schoolings/delete', [SchoolingController::class, 'delete']);
 Route::resource('image', ImagesController::class);
 
-Route::resource('resumes', ResumesController::class);
+Route::resource('favorites', FavoritesController::class);
+Route::post('favorites/delete', [FavoritesController::class, 'delete']);
+
+// Route::resource('resumes', ResumesController::class);
+Route::get('resumes', [ResumesController::class, 'index']);
+Route::get('resumes/{id}', [ResumesController::class, 'show']);
 
 
 Route::prefix('auth')->group(function() {

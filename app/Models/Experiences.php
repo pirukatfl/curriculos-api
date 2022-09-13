@@ -16,6 +16,7 @@ class Experiences extends Model
         'date_out',
         'current_job',
         'office',
-        'office_description'
+        'office_description',
+        'working_time_on_job',
     ];
 }

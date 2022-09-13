@@ -5,6 +5,13 @@ namespace App\Models;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Courses;
+
+$cou = Courses::all();
+
+foreach ($cou as $role) {
+    // echo $role->pivot->created_at;
+}
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -58,7 +65,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function contacts()
     {
-        return $this->hasOne(Contacts::class);
+        return $this->hasMany(Contacts::class);
     }
     public function courses()
     {
