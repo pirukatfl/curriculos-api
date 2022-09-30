@@ -31,7 +31,7 @@ class ResumesController extends Controller
 
             if ($name) {
                 $query->whereHas('profile', function (Builder $query2) use($name) {
-                    $query2->where('name', 'like', '%'.$name.'%');
+                    $query2->where('name', 'ilike', '%'.$name.'%');
                 });
             }
 

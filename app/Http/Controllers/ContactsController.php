@@ -52,7 +52,7 @@ class ContactsController extends Controller
                     [
                         'user_id'=> $item['user_id'],
                         'type'=> $item['type'],
-                        'value'=> $item['value'],
+                        // 'value'=> $item['value'],
                     ],$item
                 );
             }

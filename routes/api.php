@@ -14,6 +14,7 @@ use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\ResumesController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\LogsController;
+use App\Http\Controllers\FeedbackController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -36,6 +37,7 @@ Route::resource('adresses', AddressesController::class);
 Route::resource('profiles', ProfileController::class);
 Route::resource('courses', CoursesController::class);
 Route::resource('logs', LogsController::class);
+Route::resource('feedbacks', FeedbackController::class);
 
 Route::get('all-courses', [CoursesController::class, 'allCourses']);
 
