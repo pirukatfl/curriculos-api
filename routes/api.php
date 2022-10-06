@@ -63,7 +63,7 @@ Route::get('resumes/{id}', [ResumesController::class, 'show']);
 
 Route::prefix('auth')->group(function() {
     Route::post('login', [LoginController::class, 'login']);
-    Route::post('logout', [LogoutController::class, 'logout']);
+    Route::get('logout', [LogoutController::class, 'logout']);
     Route::post('register', [RegisterController::class, 'register']);
 });
 

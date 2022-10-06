@@ -28,6 +28,7 @@ class LoginController extends Controller {
 
             return $this->respondWithToken($token);
         } catch (\Throwable $th) {
+            return $th;
             return response()->json([
                 'error'=> $th
             ], 500);

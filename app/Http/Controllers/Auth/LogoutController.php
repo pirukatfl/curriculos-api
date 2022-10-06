@@ -17,12 +17,13 @@ class LogoutController extends Controller {
         $this->middleware('auth:api', ['except' => ['logout']]);
     }
 
-    public function logout(Request $request) {
+    public function logout() {
         try {
             auth()->logout();
 
-            return response()->json(['message' => 'Deslogado com sucesso!', 200]);
+            return response()->json(['message' => 'Deslogado com sucesso!'], 200);
         } catch (\Throwable $th) {
+            return $th;
             return response()->json([
                 'msg'=> $th
             ], 500);
