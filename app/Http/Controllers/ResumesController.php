@@ -16,6 +16,7 @@ class ResumesController extends Controller
             $office = $request->input('office');
             $course_name = $request->input('course_name');
             $working_time_on_job = $request->input('working_time_on_job');
+            $district = $request->input('district');
 
 	    $query = User::where('permission_id', 3)
             ->with([
@@ -50,6 +51,11 @@ class ResumesController extends Controller
             if ($working_time_on_job) {
                 $query->whereHas('experiences', function (Builder $query2) use($working_time_on_job) {
                     $query2->where('working_time_on_job', '=', $working_time_on_job);
+                });
+            }
+            if ($district) {
+                $query->whereHas('profile', function (Builder $query2) use($district) {
+                    $query2->where('district', 'ilike', '%'.$district.'%');
                 });
             }
             // return $query;

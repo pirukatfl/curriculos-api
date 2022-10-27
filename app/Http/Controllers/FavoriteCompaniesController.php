@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Courses;
+use App\Models\FavoriteCompanies;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class CoursesController extends Controller
+class FavoriteCompaniesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,27 +15,11 @@ class CoursesController extends Controller
     public function index()
     {
         try {
-            $data = DB::table('courses_view');
+            $data = FavoriteCompanies::all();
             return response()->json([
                 'data'=> $data
             ], 200);
         } catch (\Throwable $th) {
-            return $th;
-            return response()->json([
-                'msg'=> $th
-            ], 500);
-        }
-    }
-
-    public function AllCourses()
-    {
-        try {
-            $data = Courses::all();
-            return response()->json([
-                'data'=> $data
-            ], 200);
-        } catch (\Throwable $th) {
-            return $th;
             return response()->json([
                 'msg'=> $th
             ], 500);
@@ -62,23 +45,12 @@ class CoursesController extends Controller
     public function store(Request $request)
     {
         try {
-            foreach($request->all()['courses'] as $item){
-                // return $request->all();
-                Courses::updateOrCreate(
-                    [
-                        'id'=> $item['id'],
-                        'user_id'=> $item['user_id'],
-                        'institution_name'=> $item['institution_name'],
-                        'course_name'=> $item['course_name'],
-                    ],$item
-                );
-            }
-
+            $data = FavoriteCompanies::updateOrCreate($request->all());
             return response()->json([
                 'msg'=> 'salvos com sucesso!'
             ], 200);
 
-        } catch (\Throwable $th) {
+        } catch (\Error $th) {
             return $th;
             return response()->json([
                 'msg'=> $th
@@ -89,13 +61,13 @@ class CoursesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Courses  $courses
+     * @param  \App\Models\FavoriteCompanies  $favoriteCompanies
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         try {
-            $data = Courses::where('user_id',$id)->get();
+            $data = FavoriteCompanies::where('user_id',$id)->get();
             return response()->json([
                 'data'=> $data
             ], 200);
@@ -109,10 +81,10 @@ class CoursesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Courses  $courses
+     * @param  \App\Models\FavoriteCompanies  $favoriteCompanies
      * @return \Illuminate\Http\Response
      */
-    public function edit(Courses $courses)
+    public function edit(FavoriteCompanies $favoriteCompanies)
     {
         //
     }
@@ -121,10 +93,10 @@ class CoursesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Courses  $courses
+     * @param  \App\Models\FavoriteCompanies  $favoriteCompanies
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Courses $courses)
+    public function update(Request $request, FavoriteCompanies $favoriteCompanies)
     {
         //
     }
@@ -132,18 +104,24 @@ class CoursesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Courses  $courses
+     * @param  \App\Models\FavoriteCompanies  $favoriteCompanies
      * @return \Illuminate\Http\Response
      */
+    public function destroy(FavoriteCompanies $favoriteCompanies)
+    {
+        //
+    }
+
     public function delete(Request $request)
     {
         try {
-            $data = Courses::find($request->all()['courses']['id']);
+            $data = FavoriteCompanies::find($request->all()['id']);
             $data->delete();
             return response()->json([
                 'data'=> $data
             ], 200);
         } catch (\Throwable $th) {
+            return $th;
             return response()->json([
                 'msg'=> $th
             ], 500);

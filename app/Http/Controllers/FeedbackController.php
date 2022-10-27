@@ -14,7 +14,6 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        dd($request);
         return Feedback::create([
             'email' => $request->all()['email'],
             'text' => $request->all()['text']
@@ -39,7 +38,6 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         return Feedback::create([
             'email' => $request->all()['email'],
             'text' => $request->all()['text']

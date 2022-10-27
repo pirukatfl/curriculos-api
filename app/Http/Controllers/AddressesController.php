@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Addresses;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AddressesController extends Controller
 {
@@ -15,7 +16,7 @@ class AddressesController extends Controller
     public function index()
     {
         try {
-            $data = Addresses::paginate(10);
+            $data = DB::table('districts_view')->get();
             return response()->json([
                 'data'=> $data
             ], 200);

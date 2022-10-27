@@ -15,6 +15,7 @@ use App\Http\Controllers\ResumesController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\LogsController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\FavoriteCompaniesController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -55,6 +56,9 @@ Route::resource('image', ImagesController::class);
 
 Route::resource('favorites', FavoritesController::class);
 Route::post('favorites/delete', [FavoritesController::class, 'delete']);
+
+Route::resource('favorites-companies', FavoriteCompaniesController::class);
+Route::post('favorites-companies/delete', [FavoriteCompaniesController::class, 'delete']);
 
 // Route::resource('resumes', ResumesController::class);
 Route::get('resumes', [ResumesController::class, 'index']);
