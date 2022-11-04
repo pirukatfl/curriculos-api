@@ -28,6 +28,7 @@ class ResumesController extends Controller
                 'image',
                 'permission',
                 'address',
+                'favoriteCompanies',
             ])->select(['id', 'email']);
 
             if ($name) {
@@ -75,9 +76,8 @@ class ResumesController extends Controller
                 'courses',
                 'contacts',
                 'schoolings',
-                'image',
-                'permission',
                 'address',
+                'favoriteCompanies',
             ])->first();
         } catch (\Throwable $th) {
             throw $th;

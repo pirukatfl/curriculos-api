@@ -11,6 +11,7 @@ class FavoriteCompanies extends Model
 
     protected $fillable = [
         'company_name',
-        'user_id'
+        'user_id',
+        'slug',
     ];
 }

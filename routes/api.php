@@ -34,7 +34,6 @@ use App\Http\Controllers\Auth\RegisterController;
 
 Route::resource('permissions', PermissionsController::class);
 Route::resource('users', UserController::class);
-Route::resource('adresses', AddressesController::class);
 Route::resource('profiles', ProfileController::class);
 Route::resource('courses', CoursesController::class);
 Route::resource('logs', LogsController::class);
@@ -44,6 +43,9 @@ Route::get('all-courses', [CoursesController::class, 'allCourses']);
 
 Route::resource('contacts', ContactsController::class);
 Route::post('contacts/delete', [ContactsController::class, 'delete']);
+
+Route::resource('adresses', AddressesController::class);
+Route::post('adresses/delete', [AddressesController::class, 'delete']);
 
 Route::resource('experiences', ExperiencesController::class);
 Route::post('experiences/delete', [ExperiencesController::class, 'delete']);

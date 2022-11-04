@@ -112,4 +112,19 @@ class AddressesController extends Controller
     {
         //
     }
+    public function delete(Request $request)
+    {
+        try {
+            $data = Addresses::find($request->all('id'));
+            $data->delete();
+            return response()->json([
+                'data'=> $data
+            ], 200);
+        } catch (\Throwable $th) {
+            return $th;
+            return response()->json([
+                'msg'=> $th
+            ], 500);
+        }
+    }
 }

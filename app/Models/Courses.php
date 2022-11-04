@@ -15,6 +15,7 @@ class Courses extends Model
         'date_in',
         'date_out',
         'course_name',
-        'finished'
+        'finished',
+        'slug',
     ];
 }

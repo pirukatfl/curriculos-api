@@ -22,6 +22,7 @@ class CreateAddressesTable extends Migration
             $table->string('street')->nullable();
             $table->string('number')->nullable();
             $table->string('complement')->nullable();
+            $table->string('slug')->nullable();
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')

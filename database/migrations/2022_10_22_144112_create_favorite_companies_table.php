@@ -16,6 +16,8 @@ class CreateFavoriteCompaniesTable extends Migration
         Schema::create('favorite_companies', function (Blueprint $table) {
             $table->id();
             $table->string('company_name');
+            $table->string('slug')->nullable();
+
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')

@@ -17,6 +17,7 @@ class Addresses extends Model
         'district',
         'street',
         'number',
-        'complement'
+        'complement',
+        'slug',
     ];
 }

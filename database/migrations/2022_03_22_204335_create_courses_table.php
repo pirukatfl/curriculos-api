@@ -20,6 +20,7 @@ class CreateCoursesTable extends Migration
             $table->date('date_out')->nullable();
             $table->string('course_name')->nullable();
             $table->boolean('finished')->nullable();
+            $table->string('slug')->nullable();
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')

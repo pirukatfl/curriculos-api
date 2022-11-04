@@ -144,6 +144,7 @@ class CoursesController extends Controller
                 'data'=> $data
             ], 200);
         } catch (\Throwable $th) {
+            return $th;
             return response()->json([
                 'msg'=> $th
             ], 500);
