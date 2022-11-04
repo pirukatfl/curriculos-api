@@ -145,6 +145,7 @@ class CoursesController extends Controller
             ], 200);
         } catch (\Throwable $th) {
             return $th;
+
             return response()->json([
                 'msg'=> $th
             ], 500);
