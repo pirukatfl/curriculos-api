@@ -103,17 +103,13 @@ class FavoritesController extends Controller
      * @param  \App\Models\Favorites  $favorites
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Favorites $favorites)
-    {
-        //
-    }
 
-    public function delete(Request $request) {
+    public function destroy($user_id, $user_in_list_id) {
         try {
             $data = Favorites::where(
                 [
-                    'user_id'=> $request->all()['user_id'],
-                    'user_in_list_id' => $request->all()['user_in_list_id']
+                    'user_id'=> $user_id,
+                    'user_in_list_id' => $user_in_list_id
                 ])->first();
             $data->delete();
             return response()->json([

@@ -116,10 +116,10 @@ class ContactsController extends Controller
      * @param  \App\Models\Contacts  $contacts
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request)
+    public function destroy($id)
     {
         try {
-            $data = Contacts::find($request->all()['contacts']['id']);
+            $data = Contacts::find($id);
             $data->delete();
             return response()->json([
                 'data'=> $data

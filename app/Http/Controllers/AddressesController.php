@@ -108,11 +108,7 @@ class AddressesController extends Controller
      * @param  \App\Models\Addresses  $addresses
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Addresses $addresses)
-    {
-        //
-    }
-    public function delete(Request $request)
+    public function destroy(Request $request)
     {
         try {
             $data = Addresses::find($request->all('id'));

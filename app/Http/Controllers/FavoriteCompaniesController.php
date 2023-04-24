@@ -107,15 +107,11 @@ class FavoriteCompaniesController extends Controller
      * @param  \App\Models\FavoriteCompanies  $favoriteCompanies
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FavoriteCompanies $favoriteCompanies)
-    {
-        //
-    }
 
-    public function delete(Request $request)
+    public function destroy($id)
     {
         try {
-            $data = FavoriteCompanies::find($request->all()['id']);
+            $data = FavoriteCompanies::find($id);
             $data->delete();
             return response()->json([
                 'data'=> $data

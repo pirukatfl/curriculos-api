@@ -13,10 +13,11 @@ class Profile extends Model
         'user_id',
         'name',
         'biography',
-        'year',
+        'age',
         'gender',
         'birth_date',
         'cpf_cnpj',
+        'cnh_categories',
     ];
 
     public function image() {

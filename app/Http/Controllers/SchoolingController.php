@@ -119,10 +119,10 @@ class SchoolingController extends Controller
      * @param  \App\Models\Schooling  $schooling
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request)
+    public function destroy($id)
     {
         try {
-            $data = Schooling::find($request->all()['schoolings']['id']);
+            $data = Schooling::find($id);
             $data->delete();
             return response()->json([
                 'data'=> $data

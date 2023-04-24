@@ -18,9 +18,10 @@ class CreateProfilesTable extends Migration
             $table->string('name')->nullable();
             $table->text('biography')->nullable();
             $table->string('gender')->nullable();
-            $table->string('year')->nullable();
+            $table->string('age')->nullable();
             $table->date('birth_date')->nullable();
             $table->string('cpf_cnpj')->nullable();
+            $table->text('cnh_categories')->nullable();
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')

@@ -135,10 +135,10 @@ class CoursesController extends Controller
      * @param  \App\Models\Courses  $courses
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request)
+    public function destroy($id)
     {
         try {
-            $data = Courses::find($request->all()['courses']['id']);
+            $data = Courses::find($id);
             $data->delete();
             return response()->json([
                 'data'=> $data

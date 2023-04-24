@@ -42,25 +42,25 @@ Route::resource('feedbacks', FeedbackController::class);
 Route::get('all-courses', [CoursesController::class, 'allCourses']);
 
 Route::resource('contacts', ContactsController::class);
-Route::post('contacts/delete', [ContactsController::class, 'delete']);
+// Route::post('contacts/delete', [ContactsController::class, 'delete']);
 
 Route::resource('adresses', AddressesController::class);
-Route::post('adresses/delete', [AddressesController::class, 'delete']);
+// Route::post('adresses/delete', [AddressesController::class, 'delete']);
 
 Route::resource('experiences', ExperiencesController::class);
-Route::post('experiences/delete', [ExperiencesController::class, 'delete']);
+// Route::post('experiences/delete', [ExperiencesController::class, 'delete']);
 
-Route::post('courses/delete', [CoursesController::class, 'delete']);
+// Route::post('courses/delete', [CoursesController::class, 'delete']);
 Route::resource('schoolings', SchoolingController::class);
 
-Route::post('schoolings/delete', [SchoolingController::class, 'delete']);
+// Route::post('schoolings/delete', [SchoolingController::class, 'delete']);
 Route::resource('image', ImagesController::class);
 
 Route::resource('favorites', FavoritesController::class);
-Route::post('favorites/delete', [FavoritesController::class, 'delete']);
+// Route::post('favorites/delete', [FavoritesController::class, 'delete']);
 
 Route::resource('favorites-companies', FavoriteCompaniesController::class);
-Route::post('favorites-companies/delete', [FavoriteCompaniesController::class, 'delete']);
+// Route::post('favorites-companies/delete', [FavoriteCompaniesController::class, 'delete']);
 
 // Route::resource('resumes', ResumesController::class);
 Route::get('resumes', [ResumesController::class, 'index']);

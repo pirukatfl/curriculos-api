@@ -116,10 +116,10 @@ class ExperiencesController extends Controller
      * @param  \App\Models\Experiences  $experiences
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request)
+    public function destroy($id)
     {
         try {
-            $data = Experiences::find($request->all()['experiences']['id']);
+            $data = Experiences::find($id);
             $data->delete();
             return response()->json([
                 'data'=> $data

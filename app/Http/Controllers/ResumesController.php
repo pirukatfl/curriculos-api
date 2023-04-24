@@ -17,6 +17,9 @@ class ResumesController extends Controller
             $course_name = $request->input('course_name');
             $working_time_on_job = $request->input('working_time_on_job');
             $district = $request->input('district');
+            $initial_age = $request->input('initial_age');
+            $final_age = $request->input('final_age');
+            $cnh_categories = $request->input('cnh_categories');
 
 	    $query = User::where('permission_id', 3)
             ->with([
@@ -59,6 +62,34 @@ class ResumesController extends Controller
                     $query2->where('district', 'ilike', '%'.$district.'%');
                 });
             }
+
+            if ($initial_age && $final_age) {
+                $query->whereHas('profile', function (Builder $query2) use($initial_age, $final_age) {
+                    $query2->whereBetween('age', [$initial_age, $final_age]);
+                });
+            }
+
+            if ($initial_age && !$final_age) {
+                $query->whereHas('profile', function (Builder $query2) use($initial_age) {
+                    $query2->where('age', $initial_age);
+                });
+            }
+
+            if (!$initial_age && $final_age) {
+                $query->whereHas('profile', function (Builder $query2) use($final_age) {
+                    $query2->where('age', $final_age);
+                });
+            }
+
+            if ($cnh_categories) {
+                $arr = explode(",", $cnh_categories);
+                foreach($arr as $item) {
+                    $query->whereHas('profile', function (Builder $query2) use($item) {
+                        $query2->where('cnh_categories', 'ilike', '%'.$item.'%');
+                    });
+                }
+            }
+
             // return $query;
             return $query->paginate($per_page=10);
         } catch (\Throwable $th) {
@@ -66,7 +97,7 @@ class ResumesController extends Controller
         }
     }
 
-    public function show(Request $request, $id) {
+    public function show($id) {
         try {
             return User::where('id', $id)
             ->select(['id', 'email'])
