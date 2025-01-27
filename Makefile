@@ -14,3 +14,7 @@ down:
 database:
 	@echo 'Explosão tchackabum'
 	@$(ARTISAN) migrate:fresh && $(ARTISAN) db:seed
+
+jwt-key:
+	@$(ARTISAN) jwt:secret
+	@echo 'Key was created in .env > JWT_SECRET'

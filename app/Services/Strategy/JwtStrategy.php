@@ -2,25 +2,25 @@
 
 namespace App\Services\Strategy;
 
-use App\Services\Interfaces\JwtInterface;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Config;
-use Jose\Component\Core\AlgorithmManager;
-use Jose\Component\Signature\Algorithm\HS256;
-use Jose\Component\KeyManagement\JWKFactory;
-use Jose\Component\Signature\JWSBuilder;
-use Jose\Component\Signature\Serializer\CompactSerializer;
+use App\Services\Interfaces\Jwt;
+use Illuminate\Support\Facades\{
+    Auth,
+    Config
+};
+use Jose\Component\{
+    Core\AlgorithmManager,
+    KeyManagement\JWKFactory
+};
+use Jose\Component\Signature\{
+    JWSBuilder,
+    Algorithm\HS256,
+    Serializer\CompactSerializer
+};
 
-
-class JwtStrategy implements JwtInterface
+class JwtStrategy implements Jwt
 {
     private string $personalToken;
     private string $payload;
-
-    public function __construct()
-    {
-
-    }
 
     public function setAlgorithm(): array
     {

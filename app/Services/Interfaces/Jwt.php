@@ -2,7 +2,7 @@
 
 namespace App\Services\Interfaces;
 
-interface JwtInterface
+interface Jwt
 {
     public function setAlgorithm(): array;
 

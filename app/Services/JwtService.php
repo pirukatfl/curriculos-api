@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use App\Services\Interfaces\JwtInterface;
+use App\Services\Interfaces\Jwt;
 use Exception;
 
 class JwtService
 {
-    private JwtInterface $instance;
+    private Jwt $instance;
     public function __construct(string $className)
     {
         $this->instance = $this->getInstance($className);
