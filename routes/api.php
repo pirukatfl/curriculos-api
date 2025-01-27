@@ -23,7 +23,7 @@ use App\Http\Controllers\{
 ################################
 #### A U T H    R O U T E S ####
 ################################
-Route::group(['middleware' => 'api'], function () {
+Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::resource('adresses', AddressesController::class);
     Route::resource('contacts', ContactsController::class);
     Route::resource('courses', CoursesController::class);

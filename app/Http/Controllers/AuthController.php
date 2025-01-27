@@ -19,4 +19,6 @@ class AuthController extends Controller
 
         return (new AuthService)->attempt($validated);
     }
+
+
 }
